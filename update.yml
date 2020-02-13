@@ -21,6 +21,5 @@
           - nmap
           - hashid
           - xclip
-          - libpq-dev
-          - libpcap0.8-dev
+          - cherrytree 
         update_cache: yes
