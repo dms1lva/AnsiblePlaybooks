@@ -1,0 +1,13 @@
+- name: Do basic setup as sudo
+  hosts: all
+  tasks:
+    - shell: logname
+      register: logname 
+    - name: Create seclists symlink
+      file:
+        src: '/home/{{ logname.stdout }}/Repos/SecLists'
+        dest: '/usr/share/wordlists'
+        state: link
+        owner: '{{ logname.stdout }}'
+        group: '{{ logname.stdout }}'
+      become: yes
