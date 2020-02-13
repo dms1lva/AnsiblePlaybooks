@@ -1,4 +1,3 @@
----
 - hosts: all
   vars:
     # your extra bundles here
@@ -7,13 +6,15 @@
     zsh_autosuggestions_bind_key: "^U"
     zsh_antigen_theme: "pygmalion"
     zsh_aliases:
-            - { alias: 'whats-my-ip', action: 'curl https://ipinfo.io/ip'}
-            - { alias: 'glom', action: 'git pull origin master'}
-            - { alias: 'glod', action: 'git pull origin develop'}
-            - { alias: 'gcom', action: 'git checkout master'}
-            - { alias: 'gcod', action: 'git checkout develop'}
-            - { alias: 'webshare', action: 'python -m SimpleHTTPServer'}
-            - { alias: 'pbcopy', action: 'xclip -sel clipboard'}
-            - { alias: 'do-updates', action: 'sudo apt update && sudo apt full-upgrade'}
+      - { alias: 'whats-my-ip', action: 'curl https://ipinfo.io/ip'}
+      - { alias: 'glom', action: 'git pull origin master'}
+      - { alias: 'glod', action: 'git pull origin develop'}
+      - { alias: 'gcom', action: 'git checkout master'}
+      - { alias: 'gcod', action: 'git checkout develop'}
+      - { alias: 'webshare', action: 'python -m SimpleHTTPServer'}
+      - { alias: 'pbcopy', action: 'xclip -sel clipboard'}
+      - { alias: 'do-updates', action: 'sudo apt update && sudo apt full-upgrade'}
+      - { alias: 'copy-pub-key', action: 'cat ~/.ssh/id_rsa.pub | xclip -sel clipboard'}
+
   roles:
     - viasite-ansible.zsh

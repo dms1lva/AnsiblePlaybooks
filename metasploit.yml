@@ -1,31 +1,10 @@
 - name: Metasploit
   hosts: all
   tasks:
-    - name: Install core deps
-      apt:
-        name:
-          - libpq-dev
-          - libpcap0.8-dev
-
-    - name: Clone Repository
-      git:
-        repo: https://github.com/rapid7/metasploit-framework
-        dest: "{{ ansible_env.HOME }}/Tools/metasploit"
-
-    - name: Install Ruby
-      shell: rvm install ruby-`(cat .ruby-version)`
+    - name: Install Metasploit
+      shell: 'curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+  chmod 755 msfinstall && \
+  ./msfinstall'
       args:
-        chdir: "{{ ansible_env.HOME }}/Tools/metasploit"
-        executable: /usr/bin/zsh
-
-    - name: Install Bundler
-      shell: gem install bundler
-      args:
-        chdir: "{{ ansible_env.HOME }}/Tools/metasploit"
-        executable: /usr/bin/zsh
-
-    - name: Install Gems
-      shell: bundle install
-      args:
-        chdir: "{{ ansible_env.HOME }}/Tools/metasploit"
+        chdir: /tmp
         executable: /usr/bin/zsh

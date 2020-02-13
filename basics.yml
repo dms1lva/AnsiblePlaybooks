@@ -1,27 +1,7 @@
-- name: Install basic software
+- name: Do basic setup
   hosts: all
   tasks:
-    - name: Update repositories cache and install deps
-      apt:
-        name:
-          - git
-          - python2
-          - python3
-          - curl
-          - tmux
-          - htop
-          - python-pip
-          - strace
-          - mosh
-          - golang
-          - pipenv
-          - vim-gtk
-          - silversearcher-ag
-          - nmap
-          - hashid
-        update_cache: yes
-
-
+ 
     - name: Get GPG keys for RVM install package
       shell: curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 
@@ -30,14 +10,13 @@
       args:
         warn: false
 
+    - name: Create directory for repositories
+      shell: mkdir -p {{ ansible_env.HOME }}/Repos
+
     - name: Install seclists wordlists
-      shell: mkdir $HOME/Repos && mkdir -p /usr/share/wordlists
       git:
           repo: git@github.com:danielmiessler/SecLists.git
-          dest: $HOME/Repos
-
-    - name: Create seclists symlink
-      shell: ln -s $HOME/Repos /usr/share/wordlists
+          dest: '{{ ansible_env.HOME }}/Repos/SecLists'
 
     - name: Configure zsh autosuggest strategy
       shell: echo ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd >> ~/.zshrc.local
@@ -47,4 +26,7 @@
 
     - name: Configure zsh beeps
       shell: echo "unsetopt LIST_BEEP" >> ~/.zshrc.local
+    
+    - name: Tell git who I am
+      shell: git config --global user.email "dmsilva@protonmail.com" && git config --global user.name "Dario Martins Silva"
 
