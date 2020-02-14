@@ -8,6 +8,7 @@
           - git-extras
           - python2
           - python3
+          - golang-go
           - curl
           - tmux
           - htop
@@ -23,6 +24,7 @@
           - xclip
           - cherrytree 
           - python3-venv
+          - mlocate
           - libwhisker2-perl # nikto
           - libnet-ssleay-perl #nikto ssl
           - libcrypt-ssleay-perl #nikto ssl

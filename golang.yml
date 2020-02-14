@@ -1,0 +1,17 @@
+- name: Configure golang
+  hosts: all
+  tasks:
+
+  - name: Configure gopath
+    lineinfile:
+      path: '{{ ansible_env.HOME }}/.zshrc' 
+      state: present
+      insertafter: EOF
+      line: 'export GOPATH={{ ansible_env.HOME }}/go'
+
+  - name: add gopath to path
+    lineinfile:
+      path: '{{ ansible_env.HOME }}/.zshrc' 
+      state: present
+      insertafter: EOF
+      line: 'path+=$GOPATH/bin'

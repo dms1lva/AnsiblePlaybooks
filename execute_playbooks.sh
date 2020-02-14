@@ -17,6 +17,10 @@ sudo ansible-playbook -i "localhost," -c local ./update.yml
 ansible-playbook -i "localhost," -c local ./basics.yml
 sudo ansible-playbook -i "localhost," -c local ./sudo_basics.yml
 
+title "Install golang"
+ansible-galaxy install fubarhouse.golang
+sudo ansible-playbook -i "localhost," -c local ./golang.yml
+
 title "Install vscode"
 ansible-galaxy install gantsign.visual-studio-code --force
 ansible-playbook -i "localhost," -c local ./vscode.yml

@@ -1,0 +1,6 @@
+- name: ffuf
+  hosts: all
+  tasks:
+
+    - name: Install ffuf
+      shell: go get github.com/ffuf/ffuf
