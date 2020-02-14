@@ -21,6 +21,9 @@ title "Install vscode"
 ansible-galaxy install gantsign.visual-studio-code --force
 ansible-playbook -i "localhost," -c local ./vscode.yml
 
+title "Install nikto"
+ansible-playbook -i "localhost," -c local ./nikto.yml
+
 os_string=`cat /etc/issue`
 
 if [[ $os_string != *"Kali"* ]]; then
@@ -31,6 +34,8 @@ fi
 title "Install pwndbg"
 ansible-playbook -i "localhost," -c local ./pwndbg.yml
 
+title "Create symlinks"
+sudo ansible-playbook -i "localhost," -c local ./symlinks.yml
 
 
 
