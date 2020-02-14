@@ -11,3 +11,10 @@
         owner: '{{ logname.stdout }}'
         group: '{{ logname.stdout }}'
       become: yes
+
+    - name: Create nikto symlink
+      file:
+        src: '/home/{{ logname.stdout }}/Tools/nikto/program/nikto.pl'
+        dest: '/usr/local/bin/nikto'
+        state: link
+      become: yes

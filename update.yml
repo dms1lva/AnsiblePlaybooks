@@ -22,4 +22,9 @@
           - hashid
           - xclip
           - cherrytree 
+          - python3-venv
+          - libwhisker2-perl # nikto
+          - libnet-ssleay-perl #nikto ssl
+          - libcrypt-ssleay-perl #nikto ssl
+          - librpc-xml-perl #nikto rpc::xml
         update_cache: yes

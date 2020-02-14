@@ -1,0 +1,8 @@
+- name: pwndbg
+  hosts: all
+  tasks:
+
+    - name: Clone nikto Repository
+      git:
+        repo: https://github.com/sullo/nikto/
+        dest: "{{ ansible_env.HOME }}/Tools/nikto"
