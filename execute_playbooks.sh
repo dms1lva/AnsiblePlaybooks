@@ -18,8 +18,10 @@ ansible-playbook -i "localhost," -c local ./basics.yml
 sudo ansible-playbook -i "localhost," -c local ./sudo_basics.yml
 
 title "Install golang"
-ansible-galaxy install fubarhouse.golang
 sudo ansible-playbook -i "localhost," -c local ./golang.yml
+
+title "Install ffuf"
+sudo ansible-playbook -i "localhost," -c local ./ffuf.yml
 
 title "Install vscode"
 ansible-galaxy install gantsign.visual-studio-code --force
@@ -27,6 +29,9 @@ ansible-playbook -i "localhost," -c local ./vscode.yml
 
 title "Install nikto"
 ansible-playbook -i "localhost," -c local ./nikto.yml
+
+title "Configure vim"
+ansible-playbook -i "localhost," -c local ./vim.yml
 
 os_string=`cat /etc/issue`
 

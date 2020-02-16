@@ -1,17 +1,50 @@
 - name: Install & Configure golang
   hosts: all
+
+  vars:
+    go_version: 1.13.8
+
   tasks:
 
-  - name: Make sure system golang is uninstalled
-    shell: apt remove golang-go
 
-  - name: Configure gopath
+  - shell: logname
+    register: logname
+
+  - name: Make sure system golang is uninstalled
+    apt:
+      name:
+        - golang-go
+      state: absent
+
+  - name: Download golang archive
+    get_url:
+      url: 'https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz'
+      dest: /tmp
+    become: yes
+    become_user: '{{ logname.stdout }}'
+
+  - name: decompress & install go
+    unarchive:
+      src: '/tmp/go{{ go_version }}.linux-amd64.tar.gz'
+      dest: /usr/local
+  
+  - name: add go binaries to path
     lineinfile:
       path: '{{ ansible_env.HOME }}/.zshrc' 
       state: present
       insertafter: EOF
-      line: 'export GOPATH={{ ansible_env.HOME }}/go'
+      line: 'path+=/usr/local/go/bin'
+    become: yes
+    become_user: '{{ logname.stdout }}'
 
+  - name: Configure gopath
+    lineinfile:
+      path: '/home/{{ logname.stdout }}/.zshrc' 
+      state: present
+      insertafter: EOF
+      line: 'export GOPATH={{ ansible_env.HOME }}/go'
+    become: yes
+    become_user: '{{ logname.stdout }}'
 
   - name: add gopath to path
     lineinfile:
@@ -19,3 +52,5 @@
       state: present
       insertafter: EOF
       line: 'path+=$GOPATH/bin'
+    become: yes
+    become_user: '{{ logname.stdout }}'
