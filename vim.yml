@@ -1,0 +1,36 @@
+- name: Configure vim
+  hosts: all
+  tasks:
+
+  - name: create vimrc if does not exists
+    file: 
+      path: '{{ ansible_env.HOME }}/.vimrc'
+      state: touch
+
+  - name: relative numbers
+    lineinfile:
+      path: '{{ ansible_env.HOME }}/.vimrc' 
+      state: present
+      insertafter: EOF
+      line: 'set relativenumber'
+
+  - name: 2 spaces tabs
+    lineinfile:
+      path: '{{ ansible_env.HOME }}/.vimrc' 
+      state: present
+      insertafter: EOF
+      line: 'set tabstop=2'
+
+  - name: expand tabs
+    lineinfile:
+      path: '{{ ansible_env.HOME }}/.vimrc' 
+      state: present
+      insertafter: EOF
+      line: 'set expandtab'
+
+  - name: syntax highlighting
+    lineinfile:
+      path: '{{ ansible_env.HOME }}/.vimrc' 
+      state: present
+      insertafter: EOF
+      line: 'syntax on'

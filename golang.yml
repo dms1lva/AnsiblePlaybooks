@@ -1,6 +1,9 @@
-- name: Configure golang
+- name: Install & Configure golang
   hosts: all
   tasks:
+
+  - name: Make sure system golang is uninstalled
+    shell: apt remove golang-go
 
   - name: Configure gopath
     lineinfile:
@@ -8,6 +11,7 @@
       state: present
       insertafter: EOF
       line: 'export GOPATH={{ ansible_env.HOME }}/go'
+
 
   - name: add gopath to path
     lineinfile:

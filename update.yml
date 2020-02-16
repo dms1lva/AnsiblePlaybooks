@@ -6,7 +6,7 @@
         name:
           - git
           - git-extras
-          - python2
+          - python
           - python3
           - golang-go
           - curl
@@ -16,7 +16,6 @@
           - strace
           - mosh
           - golang
-          - pipenv
           - vim-gtk
           - silversearcher-ag
           - nmap
